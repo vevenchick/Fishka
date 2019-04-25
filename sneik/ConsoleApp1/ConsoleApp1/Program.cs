@@ -15,7 +15,7 @@ namespace ConsoleApp1
         int _snake_X;
         int _snake_Y;
         Random random = new Random();
-
+        
 
         public Game(int w, int h)
         {
@@ -25,6 +25,42 @@ namespace ConsoleApp1
             _frute_Y = random.Next(1, _h - 2);
             _snake_X = random.Next(1, _w - 2);
             _snake_Y = random.Next(1, _h - 2);
+        }
+       public void Snakeleft()
+        {
+           
+            if (_snake_X > 1)
+            {
+                --_snake_X;
+            }
+
+        }
+        public void Snakeright()
+        {
+           
+
+            if (_snake_X < _w-2)
+            {
+                ++_snake_X;
+            }
+
+        }
+        public void Snakedown()
+        {
+            
+            if (_snake_Y < _h-1)
+            {
+                ++_snake_Y;
+            }
+
+        }
+        public void Snakeup()
+        {
+            
+            if (_snake_Y > 1)
+            {
+                --_snake_Y;
+            }
         }
         public void DrawFruit()
         {
@@ -82,20 +118,27 @@ namespace ConsoleApp1
                 {
                     case ConsoleKey.UpArrow:
                         Console.WriteLine("змея вверх");
+                        game.Snakeup();
                         break;
                     case ConsoleKey.DownArrow:
                         Console.WriteLine("змея вниз");
+                        game.Snakedown();
                         break;
                     case ConsoleKey.LeftArrow:
                         Console.WriteLine("змея влево");
+                        game.Snakeleft();
                         break;
                     case ConsoleKey.RightArrow:
                         Console.WriteLine("змея вправо");
+                        game.Snakeright();
                         break;
                 }
-                key = Console.ReadKey();
+                if (Console.KeyAvailable)
+                {
+                    key = Console.ReadKey();
 
-
+                }
+                System.Threading.Thread.Sleep(200);
             }
 
         }
