@@ -138,7 +138,7 @@ namespace ConsoleApp1
                     key = Console.ReadKey();
 
                 }
-                System.Threading.Thread.Sleep(200);
+                System.Threading.Thread.Sleep(300);
             }
 
         }
