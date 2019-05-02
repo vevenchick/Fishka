@@ -26,7 +26,7 @@ namespace ConsoleApp1
             _snake_X = random.Next(1, _w - 2);
             _snake_Y = random.Next(1, _h - 2);
         }
-        public void Snakeleft()
+       public void Snakeleft()
         {
            
             if (_snake_X > 1)
@@ -72,13 +72,6 @@ namespace ConsoleApp1
             Console.SetCursorPosition(_snake_X, _snake_Y);
             Console.Write("R");
         }
-        public bool IsFruitEated()
-        {
-            return  _frute_X == _snake_X && _snake_Y == _frute_X;
-            
-                
-            
-        }
 
         public void DrawFeild()
         {
@@ -114,7 +107,7 @@ namespace ConsoleApp1
             int h = Int32.Parse(mass[1]);
             ConsoleKeyInfo key = new ConsoleKeyInfo();
             Game game = new Game(w, h);
-            while (game.IsFruitEated())
+            while (true)
             {
                 Console.Clear();
                 game.DrawFeild();
@@ -146,7 +139,6 @@ namespace ConsoleApp1
 
                 }
                 System.Threading.Thread.Sleep(300);
-               
             }
 
         }
