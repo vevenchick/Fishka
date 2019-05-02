@@ -26,7 +26,7 @@ namespace ConsoleApp1
             _snake_X = random.Next(1, _w - 2);
             _snake_Y = random.Next(1, _h - 2);
         }
-       public void Snakeleft()
+        public void Snakeleft()
         {
            
             if (_snake_X > 1)
@@ -57,7 +57,8 @@ namespace ConsoleApp1
         public void Snakeup()
         {
             
-            if (_snake_Y > 1)
+
+                if (_snake_Y > 1)
             {
                 --_snake_Y;
             }
@@ -72,7 +73,6 @@ namespace ConsoleApp1
             Console.SetCursorPosition(_snake_X, _snake_Y);
             Console.Write("R");
         }
-
         public void DrawFeild()
         {
 
@@ -93,54 +93,73 @@ namespace ConsoleApp1
             }
 
         }
+        public bool IsFruitEated()
+        {
+            return _frute_X == _snake_X && _snake_Y == _frute_Y;
+           
+        }
+        public void SetNewFriutPosition()
+        {
+            _frute_X = random.Next(1, _w - 2);
+            _frute_Y = random.Next(1, _h - 2);
+        }
+
+       
     }
     class Program
     {
-
+        
 
 
         static void Main(string[] args)
         {
+            int score = 0;
             string n = Console.ReadLine();
             string[] mass = n.Split(' ');
             int w = Int32.Parse(mass[0]);
             int h = Int32.Parse(mass[1]);
             ConsoleKeyInfo key = new ConsoleKeyInfo();
             Game game = new Game(w, h);
+
             while (true)
             {
+                if (game.IsFruitEated())
+                {
+                    score++;
+                    game.SetNewFriutPosition();
+                }
                 Console.Clear();
                 game.DrawFeild();
-                game.DrawFruit();
                 game.DrawSnake();
+                game.DrawFruit();
+
+
                 Console.SetCursorPosition(0, h + 1);
-                switch (key.Key)
-                {
-                    case ConsoleKey.UpArrow:
-                        Console.WriteLine("змея вверх");
-                        game.Snakeup();
-                        break;
-                    case ConsoleKey.DownArrow:
-                        Console.WriteLine("змея вниз");
-                        game.Snakedown();
-                        break;
-                    case ConsoleKey.LeftArrow:
-                        Console.WriteLine("змея влево");
-                        game.Snakeleft();
-                        break;
-                    case ConsoleKey.RightArrow:
-                        Console.WriteLine("змея вправо");
-                        game.Snakeright();
-                        break;
-                }
                 if (Console.KeyAvailable)
                 {
                     key = Console.ReadKey();
 
                 }
-                System.Threading.Thread.Sleep(300);
-            }
+                switch (key.Key)
+                {
+                    case ConsoleKey.UpArrow:
+                        game.Snakeup();
+                        break;
+                    case ConsoleKey.DownArrow:
+                        game.Snakedown();
+                        break;
+                    case ConsoleKey.LeftArrow:
+                        game.Snakeleft();
+                        break;
+                    case ConsoleKey.RightArrow:
+                        game.Snakeright();
+                        break;
+                }
 
+             
+                System.Threading.Thread.Sleep(200);
+            }
+            
         }
     }
 }
